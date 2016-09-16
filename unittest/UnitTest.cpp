@@ -784,6 +784,14 @@ XL_NAMED_TEST_CASE(str_replace_inplace)
 // str_replace
 XL_NAMED_TEST_CASE(str_replace)
 {
+    // char *str, str_len, char *find, find_len, char *replace, replace_len
+    // char *str, str_len, char *find, char *replace
+    // char *str, str_len, char find, char replace
+    // std::string str, char *find, find_len, char *replace, replace_len
+    // std::string str, char *find, char *replace
+    // std::string str, char find, char replace
+    // std::string str, std::string find, std::string replace
+
     char sz[] = "ab";
     // char *str, str_len, char *find, find_len, char *replace, replace_len
     strcpy(sz, "ab");
