@@ -38,7 +38,7 @@ namespace stdex
     //
 
     struct Null;
-    template<class _Elem, class _Traits = Null, class _Alloc = Null>
+    template<class _Elem, class _SSTraits = Null, class _SSAlloc = Null>
     class shadow_string
     {
     public:
@@ -146,28 +146,28 @@ namespace stdex
     // str_split_copy
     //
 
-    template<class _Elem, class _Traits = char_traits<_Elem>, class _Alloc = allocator<_Elem>>
+    template<class _Elem, class _Traits = std::char_traits<_Elem>, class _Alloc = std::allocator<_Elem>>
     inline std::vector<std::basic_string<_Elem, _Traits, _Alloc>> str_split_copy(
         const _Elem *str, size_t str_len, const _Elem *splitter, size_t splitter_len, size_t max = 0
     ) {
         return str_split<_Elem, _Traits, _Alloc, std::basic_string>(str, str_len, splitter, splitter_len, max);
     }
 
-    template<class _Elem, class _Traits = char_traits<_Elem>, class _Alloc = allocator<_Elem>>
+    template<class _Elem, class _Traits = std::char_traits<_Elem>, class _Alloc = std::allocator<_Elem>>
     inline std::vector<std::basic_string<_Elem, _Traits, _Alloc>> str_split_copy(
         const _Elem *str, size_t str_len, const _Elem splitter, size_t max = 0
     ) {
         return str_split_copy(str, str_len, &splitter, 1, max);
     }
 
-    template<class _Elem, class _Traits = char_traits<_Elem>, class _Alloc = allocator<_Elem>>
+    template<class _Elem, class _Traits = std::char_traits<_Elem>, class _Alloc = std::allocator<_Elem>>
     inline std::vector<std::basic_string<_Elem, _Traits, _Alloc>> str_split_copy(
         const _Elem *str, const _Elem *splitter, size_t max = 0
     ) {
         return str_split_copy(str, str_length(str), splitter, str_length(splitter), max);
     }
 
-    template<class _Elem, class _Traits = char_traits<_Elem>, class _Alloc = allocator<_Elem>>
+    template<class _Elem, class _Traits = std::char_traits<_Elem>, class _Alloc = std::allocator<_Elem>>
     inline std::vector<std::basic_string<_Elem, _Traits, _Alloc>> str_split_copy(
         const _Elem *str, const _Elem splitter, size_t max = 0
     ) {
@@ -206,7 +206,7 @@ namespace stdex
     // str_combine
     //
 
-    template<class _Elem, class _Traits = char_traits<_Elem>, class _Alloc = allocator<_Elem>,
+    template<class _Elem, class _Traits = std::char_traits<_Elem>, class _Alloc = std::allocator<_Elem>,
         class _SSTraits = Null, class _SSAlloc = Null,
         template <class _Elem, class _Traits, class _Alloc> class _StrType = shadow_string>
     inline std::basic_string<_Elem, _Traits, _Alloc> str_combine(
@@ -215,13 +215,13 @@ namespace stdex
     ) {
         std::basic_string<_Elem, _Traits, _Alloc> ret;
         size_t total_len = 0;
-        for (std::vector<_StrType<_Elem, _SSTraits, _SSAlloc>>::const_iterator it = str_list.begin(); it != str_list.end(); ++it) {
+        for (typename std::vector<_StrType<_Elem, _SSTraits, _SSAlloc>>::const_iterator it = str_list.begin(); it != str_list.end(); ++it) {
             if (it != str_list.begin())
                 total_len += splitter_len;
             total_len += it->length();
         }
         ret.reserve(total_len);
-        for (std::vector<_StrType<_Elem, _SSTraits, _SSAlloc>>::const_iterator it = str_list.begin(); it != str_list.end(); ++it) {
+        for (typename std::vector<_StrType<_Elem, _SSTraits, _SSAlloc>>::const_iterator it = str_list.begin(); it != str_list.end(); ++it) {
             if (it != str_list.begin())
                 ret.append(splitter, splitter_len);
             ret.append(it->c_str(), it->c_str() + it->length());
@@ -229,7 +229,7 @@ namespace stdex
         return ret;
     }
 
-    template<class _Elem, class _Traits = char_traits<_Elem>, class _Alloc = allocator<_Elem>,
+    template<class _Elem, class _Traits = std::char_traits<_Elem>, class _Alloc = std::allocator<_Elem>,
         class _SSTraits = Null, class _SSAlloc = Null,
         template <class _Elem, class _Traits, class _Alloc> class _StrType = shadow_string>
     inline std::basic_string<_Elem, _Traits, _Alloc> str_combine(
@@ -239,7 +239,7 @@ namespace stdex
         return str_combine(str_list, splitter, str_length(splitter));
     }
 
-    template<class _Elem, class _Traits = char_traits<_Elem>, class _Alloc = allocator<_Elem>,
+    template<class _Elem, class _Traits = std::char_traits<_Elem>, class _Alloc = std::allocator<_Elem>,
         class _SSTraits = Null, class _SSAlloc = Null,
         template <class _Elem, class _Traits, class _Alloc> class _StrType = shadow_string>
     inline std::basic_string<_Elem, _Traits, _Alloc> str_combine(
@@ -363,7 +363,7 @@ namespace stdex
     // str_replace
     //
 
-    template<class _Elem, class _Traits = char_traits<_Elem>, class _Alloc = allocator<_Elem>>
+    template<class _Elem, class _Traits = std::char_traits<_Elem>, class _Alloc = std::allocator<_Elem>>
     inline std::basic_string<_Elem, _Traits, _Alloc> str_replace(
         const _Elem *str, size_t str_len,
         const _Elem *find, size_t find_len,
@@ -383,28 +383,28 @@ namespace stdex
         return ret;
     }
 
-    template<class _Elem, class _Traits = char_traits<_Elem>, class _Alloc = allocator<_Elem>>
+    template<class _Elem, class _Traits = std::char_traits<_Elem>, class _Alloc = std::allocator<_Elem>>
     inline std::basic_string<_Elem, _Traits, _Alloc> str_replace(
         const _Elem *str, size_t str_len, const _Elem *find, const _Elem *replace, size_t max = 0
     ) {
         return str_replace(str, str_len, find, str_length(find), replace, str_length(replace), max);
     }
 
-    template<class _Elem, class _Traits = char_traits<_Elem>, class _Alloc = allocator<_Elem>>
+    template<class _Elem, class _Traits = std::char_traits<_Elem>, class _Alloc = std::allocator<_Elem>>
     inline std::basic_string<_Elem, _Traits, _Alloc> str_replace(
         const _Elem *str, size_t str_len, const _Elem find, const _Elem replace, size_t max = 0
     ) {
         return str_replace(str, str_len, &find, 1, &replace, 1, max);
     }
 
-    template<class _Elem, class _Traits = char_traits<_Elem>, class _Alloc = allocator<_Elem>>
+    template<class _Elem, class _Traits = std::char_traits<_Elem>, class _Alloc = std::allocator<_Elem>>
     inline std::basic_string<_Elem, _Traits, _Alloc> str_replace(
         const _Elem *str, const _Elem *find, const _Elem *replace, size_t max = 0
     ) {
         return str_replace(str, str_length(str), find, str_length(find), replace, str_length(replace), max);
     }
 
-    template<class _Elem, class _Traits = char_traits<_Elem>, class _Alloc = allocator<_Elem>>
+    template<class _Elem, class _Traits = std::char_traits<_Elem>, class _Alloc = std::allocator<_Elem>>
     inline std::basic_string<_Elem, _Traits, _Alloc> str_replace(
         const _Elem *str, const _Elem find, const _Elem replace, size_t max = 0
     ) {

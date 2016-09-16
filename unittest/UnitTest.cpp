@@ -1,3 +1,7 @@
+#define _CRT_SECURE_NO_WARNINGS
+#include <string.h>
+#include <memory.h>
+
 #include <xl/UnitTest/UnitTest.h>
 #include "../include/stdex/string.h"
 
@@ -5,7 +9,7 @@ using namespace std;
 using namespace stdex;
 
 // str_length
-XL_TEST_CASE()
+XL_NAMED_TEST_CASE(str_length)
 {
     XL_TEST_ASSERT(str_length("") == 0);
     XL_TEST_ASSERT(str_length("\0") == 0);
@@ -16,7 +20,7 @@ XL_TEST_CASE()
 }
 
 // str_split
-XL_TEST_CASE()
+XL_NAMED_TEST_CASE(str_split)
 {
     // char *str, str_len, char *splitter, splitter_len
     // char *str, str_len, char splitter
@@ -311,7 +315,7 @@ XL_TEST_CASE()
 }
 
 // str_split_copy
-XL_TEST_CASE()
+XL_NAMED_TEST_CASE(str_split_copy)
 {
     // char *str, str_len, char *splitter, splitter_len
     // char *str, str_len, char splitter
@@ -588,7 +592,7 @@ XL_TEST_CASE()
 }
 
 // str_combine
-XL_TEST_CASE()
+XL_NAMED_TEST_CASE(str_combine)
 {
     // shadow_string list, char *splitter, splitter_len
     // shadow_string list, char *splitter
@@ -662,7 +666,7 @@ XL_TEST_CASE()
 }
 
 // str_replace_inplace
-XL_TEST_CASE()
+XL_NAMED_TEST_CASE(str_replace_inplace)
 {
     // char *str, str_len, char *find, find_len, char *replace, replace_len
     // char *str, str_len, char *find, char *replace
@@ -674,45 +678,45 @@ XL_TEST_CASE()
 
     char sz[] = "ab";
     // char *str, str_len, char *find, find_len, char *replace, replace_len
-    strcpy_s(sz, "ab");
+    strcpy(sz, "ab");
     XL_TEST_ASSERT(str_replace_inplace(sz, 2, "ab", 1, "xy", 1) == sz);
     XL_TEST_ASSERT(string(sz) == "xb");
-    strcpy_s(sz, "ab");
+    strcpy(sz, "ab");
     XL_TEST_ASSERT(str_replace_inplace(sz, 2, "ab", 2, "xy", 1) == sz);
     XL_TEST_ASSERT(string(sz) == "x");
-    strcpy_s(sz, "ab");
+    strcpy(sz, "ab");
     XL_TEST_ASSERT(str_replace_inplace(sz, 2, "ab", 2, "xy", 2) == sz);
     XL_TEST_ASSERT(string(sz) == "xy");
-    strcpy_s(sz, "aa");
+    strcpy(sz, "aa");
     XL_TEST_ASSERT(str_replace_inplace(sz, 2, "a", 1, "x", 1) == sz);
     XL_TEST_ASSERT(string(sz) == "xx");
-    strcpy_s(sz, "aa");
+    strcpy(sz, "aa");
     XL_TEST_ASSERT(str_replace_inplace(sz, 2, "a", 1, "x", 1, 1) == sz);
     XL_TEST_ASSERT(string(sz) == "xa");
     // char *str, str_len, char *find, char *replace
-    strcpy_s(sz, "ab");
+    strcpy(sz, "ab");
     XL_TEST_ASSERT(str_replace_inplace(sz, 2, "a", "x") == sz);
     XL_TEST_ASSERT(string(sz) == "xb");
-    strcpy_s(sz, "ab");
+    strcpy(sz, "ab");
     XL_TEST_ASSERT(str_replace_inplace(sz, 2, "ab", "x") == sz);
     XL_TEST_ASSERT(string(sz) == "x");
-    strcpy_s(sz, "ab");
+    strcpy(sz, "ab");
     XL_TEST_ASSERT(str_replace_inplace(sz, 2, "ab", "xy") == sz);
     XL_TEST_ASSERT(string(sz) == "xy");
-    strcpy_s(sz, "aa");
+    strcpy(sz, "aa");
     XL_TEST_ASSERT(str_replace_inplace(sz, 2, "a", "x") == sz);
     XL_TEST_ASSERT(string(sz) == "xx");
-    strcpy_s(sz, "aa");
+    strcpy(sz, "aa");
     XL_TEST_ASSERT(str_replace_inplace(sz, 2, "a", "x", 1) == sz);
     XL_TEST_ASSERT(string(sz) == "xa");
     // char *str, str_len, char find, char replace
-    strcpy_s(sz, "ab");
+    strcpy(sz, "ab");
     XL_TEST_ASSERT(str_replace_inplace(sz, 2, 'a', 'x') == sz);
     XL_TEST_ASSERT(string(sz) == "xb");
-    strcpy_s(sz, "aa");
+    strcpy(sz, "aa");
     XL_TEST_ASSERT(str_replace_inplace(sz, 2, 'a', 'x') == sz);
     XL_TEST_ASSERT(string(sz) == "xx");
-    strcpy_s(sz, "aa");
+    strcpy(sz, "aa");
     XL_TEST_ASSERT(str_replace_inplace(sz, 2, 'a', 'x', 1) == sz);
     XL_TEST_ASSERT(string(sz) == "xa");
 
@@ -778,40 +782,40 @@ XL_TEST_CASE()
 }
 
 // str_replace
-XL_TEST_CASE()
+XL_NAMED_TEST_CASE(str_replace)
 {
     char sz[] = "ab";
     // char *str, str_len, char *find, find_len, char *replace, replace_len
-    strcpy_s(sz, "ab");
+    strcpy(sz, "ab");
     XL_TEST_ASSERT(str_replace(sz, 2, "ab", 1, "xy", 1) == "xb");
     XL_TEST_ASSERT(string(sz) == "ab");
     XL_TEST_ASSERT(str_replace(sz, 2, "ab", 2, "xy", 1) == "x");
     XL_TEST_ASSERT(string(sz) == "ab");
     XL_TEST_ASSERT(str_replace(sz, 2, "ab", 2, "xy", 2) == "xy");
     XL_TEST_ASSERT(string(sz) == "ab");
-    strcpy_s(sz, "aa");
+    strcpy(sz, "aa");
     XL_TEST_ASSERT(str_replace(sz, 2, "a", 1, "x", 1) == "xx");
     XL_TEST_ASSERT(string(sz) == "aa");
     XL_TEST_ASSERT(str_replace(sz, 2, "a", 1, "x", 1, 1) == "xa");
     XL_TEST_ASSERT(string(sz) == "aa");
     // char *str, str_len, char *find, char *replace
-    strcpy_s(sz, "ab");
+    strcpy(sz, "ab");
     XL_TEST_ASSERT(str_replace(sz, 2, "a", "x") == "xb");
     XL_TEST_ASSERT(string(sz) == "ab");
     XL_TEST_ASSERT(str_replace(sz, 2, "ab", "x") == "x");
     XL_TEST_ASSERT(string(sz) == "ab");
     XL_TEST_ASSERT(str_replace(sz, 2, "ab", "xy") == "xy");
     XL_TEST_ASSERT(string(sz) == "ab");
-    strcpy_s(sz, "aa");
+    strcpy(sz, "aa");
     XL_TEST_ASSERT(str_replace(sz, 2, "a", "x") == "xx");
     XL_TEST_ASSERT(string(sz) == "aa");
     XL_TEST_ASSERT(str_replace(sz, 2, "a", "x", 1) == "xa");
     XL_TEST_ASSERT(string(sz) == "aa");
     // char *str, str_len, char find, char replace
-    strcpy_s(sz, "ab");
+    strcpy(sz, "ab");
     XL_TEST_ASSERT(str_replace(sz, 2, 'a', 'x') == "xb");
     XL_TEST_ASSERT(string(sz) == "ab");
-    strcpy_s(sz, "aa");
+    strcpy(sz, "aa");
     XL_TEST_ASSERT(str_replace(sz, 2, 'a', 'x') == "xx");
     XL_TEST_ASSERT(string(sz) == "aa");
     XL_TEST_ASSERT(str_replace(sz, 2, 'a', 'x', 1) == "xa");
