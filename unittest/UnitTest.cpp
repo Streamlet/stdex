@@ -830,7 +830,7 @@ XL_NAMED_TEST_CASE(str_replace)
     XL_TEST_ASSERT(string(sz) == "aa");
 
     string str;
-    // std::string &str, char *find, find_len, char *replace, replace_len
+    // std::string str, char *find, find_len, char *replace, replace_len
     str = "ab";
     XL_TEST_ASSERT(str_replace(str, "ab", 1, "xy", 1) == "xb");
     XL_TEST_ASSERT(str == "ab");
@@ -843,7 +843,7 @@ XL_NAMED_TEST_CASE(str_replace)
     XL_TEST_ASSERT(str == "aa");
     XL_TEST_ASSERT(str_replace(str, "a", 1, "x", 1, 1) == "xa");
     XL_TEST_ASSERT(str == "aa");
-    // std::string &str, char *find, char *replace
+    // std::string str, char *find, char *replace
     str = "ab";
     XL_TEST_ASSERT(str_replace(str, "a", "x") == "xb");
     XL_TEST_ASSERT(str == "ab");
@@ -856,7 +856,7 @@ XL_NAMED_TEST_CASE(str_replace)
     XL_TEST_ASSERT(str == "aa");
     XL_TEST_ASSERT(str_replace(str, "a", "x", 1) == "xa");
     XL_TEST_ASSERT(str == "aa");
-    // std::string &str, char find, char replace
+    // std::string str, char find, char replace
     str = "ab";
     XL_TEST_ASSERT(str_replace(str, 'a', 'x') == "xb");
     XL_TEST_ASSERT(str == "ab");
@@ -865,7 +865,7 @@ XL_NAMED_TEST_CASE(str_replace)
     XL_TEST_ASSERT(str == "aa");
     XL_TEST_ASSERT(str_replace(str, 'a', 'x', 1) == "xa");
     XL_TEST_ASSERT(str == "aa");
-    // std::string &str, std::string find, std::string replace
+    // std::string str, std::string find, std::string replace
     str = "ab";
     XL_TEST_ASSERT(str_replace(str, string("a"), string("x")) == "xb");
     XL_TEST_ASSERT(str == "ab");
