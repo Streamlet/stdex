@@ -72,17 +72,17 @@ namespace stdex
         template <class _Elem, class _Traits, class _Alloc> class _StrType = shadow_string>
     inline std::vector<_StrType<_Elem, _Traits, _Alloc>> str_split(
         const _Elem *str, size_t str_len,
-        const _Elem *splitter, size_t splitter_len,
+        const _Elem *delimiter, size_t delimiter_len,
         size_t max = 0
     ) {
         std::vector<_StrType<_Elem, _Traits, _Alloc>> r;
-        if (splitter_len == 0)
+        if (delimiter_len == 0)
             return r;
         const _Elem *p = str;
         for (size_t count = 0; p <= str + str_len && (max == 0 || count < max); ++count) {
-            const _Elem *f = (max > 0 && count == max - 1) ? str + str_len : std::search(p, str + str_len, splitter, splitter + splitter_len);
+            const _Elem *f = (max > 0 && count == max - 1) ? str + str_len : std::search(p, str + str_len, delimiter, delimiter + delimiter_len);
             r.push_back(_StrType<_Elem, _Traits, _Alloc>(p, f));
-            p = f + splitter_len;
+            p = f + delimiter_len;
         }
         return r;
     }
@@ -90,55 +90,55 @@ namespace stdex
     template<class _Elem, class _Traits = Null, class _Alloc = Null,
         template <class _Elem, class _Traits, class _Alloc> class _StrType = shadow_string>
     inline std::vector<_StrType<_Elem, _Traits, _Alloc>> str_split(
-        const _Elem *str, size_t str_len, const _Elem splitter, size_t max = 0
+        const _Elem *str, size_t str_len, const _Elem delimiter, size_t max = 0
     ) {
-        return str_split(str, str_len, &splitter, 1, max);
+        return str_split(str, str_len, &delimiter, 1, max);
     }
 
     template<class _Elem, class _Traits = Null, class _Alloc = Null,
         template <class _Elem, class _Traits, class _Alloc> class _StrType = shadow_string>
     inline std::vector<_StrType<_Elem, _Traits, _Alloc>> str_split(
-        const _Elem *str, const _Elem *splitter, size_t max = 0
+        const _Elem *str, const _Elem *delimiter, size_t max = 0
     ) {
-        return str_split(str, str_length(str), splitter, str_length(splitter), max);
+        return str_split(str, str_length(str), delimiter, str_length(delimiter), max);
     }
 
     template<class _Elem, class _Traits = Null, class _Alloc = Null,
         template <class _Elem, class _Traits, class _Alloc> class _StrType = shadow_string>
     inline std::vector<_StrType<_Elem, _Traits, _Alloc>> str_split(
-        const _Elem *str, const _Elem splitter, size_t max = 0
+        const _Elem *str, const _Elem delimiter, size_t max = 0
     ) {
-        return str_split(str, str_length(str), &splitter, 1, max);
+        return str_split(str, str_length(str), &delimiter, 1, max);
     }
 
     template<class _Elem, class _Traits, class _Alloc, class _SSTraits = Null, class _SSAlloc = Null,
         template <class _Elem, class _Traits, class _Alloc> class _StrType = shadow_string>
     inline std::vector<_StrType<_Elem, _SSTraits, _SSAlloc>> str_split(
         const std::basic_string<_Elem, _Traits, _Alloc> &str,
-        const _Elem *splitter,
+        const _Elem *delimiter,
         size_t max = 0
     ) {
-        return str_split(str.c_str(), str.length(), splitter, str_length(splitter), max);
+        return str_split(str.c_str(), str.length(), delimiter, str_length(delimiter), max);
     }
 
     template<class _Elem, class _Traits, class _Alloc, class _SSTraits = Null, class _SSAlloc = Null,
         template <class _Elem, class _Traits, class _Alloc> class _StrType = shadow_string>
     inline std::vector<_StrType<_Elem, _SSTraits, _SSAlloc>> str_split(
         const std::basic_string<_Elem, _Traits, _Alloc> &str,
-        const _Elem splitter,
+        const _Elem delimiter,
         size_t max = 0
     ) {
-        return str_split(str.c_str(), str.length(), &splitter, 1, max);
+        return str_split(str.c_str(), str.length(), &delimiter, 1, max);
     }
 
     template<class _Elem, class _Traits, class _Alloc, class _SSTraits = Null, class _SSAlloc = Null,
         template <class _Elem, class _Traits, class _Alloc> class _StrType = shadow_string>
     inline std::vector<_StrType<_Elem, _SSTraits, _SSAlloc>> str_split(
         const std::basic_string<_Elem, _Traits, _Alloc> &str,
-        const std::basic_string<_Elem, _Traits, _Alloc> &splitter,
+        const std::basic_string<_Elem, _Traits, _Alloc> &delimiter,
         size_t max = 0
     ) {
-        return str_split(str.c_str(), str.length(), splitter.c_str(), splitter.length(), max);
+        return str_split(str.c_str(), str.length(), delimiter.c_str(), delimiter.length(), max);
     }
 
 
@@ -148,57 +148,57 @@ namespace stdex
 
     template<class _Elem, class _Traits = std::char_traits<_Elem>, class _Alloc = std::allocator<_Elem>>
     inline std::vector<std::basic_string<_Elem, _Traits, _Alloc>> str_split_copy(
-        const _Elem *str, size_t str_len, const _Elem *splitter, size_t splitter_len, size_t max = 0
+        const _Elem *str, size_t str_len, const _Elem *delimiter, size_t delimiter_len, size_t max = 0
     ) {
-        return str_split<_Elem, _Traits, _Alloc, std::basic_string>(str, str_len, splitter, splitter_len, max);
+        return str_split<_Elem, _Traits, _Alloc, std::basic_string>(str, str_len, delimiter, delimiter_len, max);
     }
 
     template<class _Elem, class _Traits = std::char_traits<_Elem>, class _Alloc = std::allocator<_Elem>>
     inline std::vector<std::basic_string<_Elem, _Traits, _Alloc>> str_split_copy(
-        const _Elem *str, size_t str_len, const _Elem splitter, size_t max = 0
+        const _Elem *str, size_t str_len, const _Elem delimiter, size_t max = 0
     ) {
-        return str_split_copy(str, str_len, &splitter, 1, max);
+        return str_split_copy(str, str_len, &delimiter, 1, max);
     }
 
     template<class _Elem, class _Traits = std::char_traits<_Elem>, class _Alloc = std::allocator<_Elem>>
     inline std::vector<std::basic_string<_Elem, _Traits, _Alloc>> str_split_copy(
-        const _Elem *str, const _Elem *splitter, size_t max = 0
+        const _Elem *str, const _Elem *delimiter, size_t max = 0
     ) {
-        return str_split_copy(str, str_length(str), splitter, str_length(splitter), max);
+        return str_split_copy(str, str_length(str), delimiter, str_length(delimiter), max);
     }
 
     template<class _Elem, class _Traits = std::char_traits<_Elem>, class _Alloc = std::allocator<_Elem>>
     inline std::vector<std::basic_string<_Elem, _Traits, _Alloc>> str_split_copy(
-        const _Elem *str, const _Elem splitter, size_t max = 0
+        const _Elem *str, const _Elem delimiter, size_t max = 0
     ) {
-        return str_split_copy(str, str_length(str), &splitter, 1, max);
+        return str_split_copy(str, str_length(str), &delimiter, 1, max);
     }
 
     template<class _Elem, class _Traits, class _Alloc>
     inline std::vector<std::basic_string<_Elem, _Traits, _Alloc>> str_split_copy(
         const std::basic_string<_Elem, _Traits, _Alloc> &str,
-        const _Elem *splitter,
+        const _Elem *delimiter,
         size_t max = 0
     ) {
-        return str_split_copy(str.c_str(), str.length(), splitter, str_length(splitter), max);
+        return str_split_copy(str.c_str(), str.length(), delimiter, str_length(delimiter), max);
     }
 
     template<class _Elem, class _Traits, class _Alloc>
     inline std::vector<std::basic_string<_Elem, _Traits, _Alloc>> str_split_copy(
         const std::basic_string<_Elem, _Traits, _Alloc> &str,
-        const _Elem splitter,
+        const _Elem delimiter,
         size_t max = 0
     ) {
-        return str_split_copy(str.c_str(), str.length(), &splitter, 1, max);
+        return str_split_copy(str.c_str(), str.length(), &delimiter, 1, max);
     }
 
     template<class _Elem, class _Traits, class _Alloc>
     inline std::vector<std::basic_string<_Elem, _Traits, _Alloc>> str_split_copy(
         const std::basic_string<_Elem, _Traits, _Alloc> &str,
-        const std::basic_string<_Elem, _Traits, _Alloc> &splitter,
+        const std::basic_string<_Elem, _Traits, _Alloc> &delimiter,
         size_t max = 0
     ) {
-        return str_split_copy(str.c_str(), str.length(), splitter.c_str(), splitter.length(), max);
+        return str_split_copy(str.c_str(), str.length(), delimiter.c_str(), delimiter.length(), max);
     }
 
 
@@ -211,19 +211,19 @@ namespace stdex
         template <class _Elem, class _Traits, class _Alloc> class _StrType = shadow_string>
     inline std::basic_string<_Elem, _Traits, _Alloc> str_combine(
         const std::vector<_StrType<_Elem, _SSTraits, _SSAlloc>> &str_list,
-        const _Elem *splitter, size_t splitter_len
+        const _Elem *delimiter, size_t delimiter_len
     ) {
         std::basic_string<_Elem, _Traits, _Alloc> ret;
         size_t total_len = 0;
         for (typename std::vector<_StrType<_Elem, _SSTraits, _SSAlloc>>::const_iterator it = str_list.begin(); it != str_list.end(); ++it) {
             if (it != str_list.begin())
-                total_len += splitter_len;
+                total_len += delimiter_len;
             total_len += it->length();
         }
         ret.reserve(total_len);
         for (typename std::vector<_StrType<_Elem, _SSTraits, _SSAlloc>>::const_iterator it = str_list.begin(); it != str_list.end(); ++it) {
             if (it != str_list.begin())
-                ret.append(splitter, splitter_len);
+                ret.append(delimiter, delimiter_len);
             ret.append(it->c_str(), it->c_str() + it->length());
         }
         return ret;
@@ -234,9 +234,9 @@ namespace stdex
         template <class _Elem, class _Traits, class _Alloc> class _StrType = shadow_string>
     inline std::basic_string<_Elem, _Traits, _Alloc> str_combine(
         const std::vector<_StrType<_Elem, _SSTraits, _SSAlloc>> &str_list,
-        const _Elem *splitter
+        const _Elem *delimiter
     ) {
-        return str_combine(str_list, splitter, str_length(splitter));
+        return str_combine(str_list, delimiter, str_length(delimiter));
     }
 
     template<class _Elem, class _Traits = std::char_traits<_Elem>, class _Alloc = std::allocator<_Elem>,
@@ -244,9 +244,9 @@ namespace stdex
         template <class _Elem, class _Traits, class _Alloc> class _StrType = shadow_string>
     inline std::basic_string<_Elem, _Traits, _Alloc> str_combine(
         const std::vector<_StrType<_Elem, _SSTraits, _SSAlloc>> &str_list,
-        const _Elem splitter
+        const _Elem delimiter
     ) {
-        return str_combine(str_list, &splitter, 1);
+        return str_combine(str_list, &delimiter, 1);
     }
 
     template<class _Elem, class _Traits, class _Alloc,
@@ -254,9 +254,9 @@ namespace stdex
         template <class _Elem, class _Traits, class _Alloc> class _StrType = shadow_string>
     inline std::basic_string<_Elem, _Traits, _Alloc> str_combine(
         const std::vector<_StrType<_Elem, _SSTraits, _SSAlloc>> &str_list,
-        const std::basic_string<_Elem, _Traits, _Alloc> &splitter
+        const std::basic_string<_Elem, _Traits, _Alloc> &delimiter
     ) {
-        return str_combine(str_list, splitter.c_str(), splitter.length());
+        return str_combine(str_list, delimiter.c_str(), delimiter.length());
     }
 
     //

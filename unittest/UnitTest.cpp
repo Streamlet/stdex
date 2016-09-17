@@ -22,17 +22,17 @@ XL_NAMED_TEST_CASE(str_length)
 // str_split
 XL_NAMED_TEST_CASE(str_split)
 {
-    // char *str, str_len, char *splitter, splitter_len
-    // char *str, str_len, char splitter
-    // char *str, char *splitter
-    // char *str, char splitter
-    // std::string str, char *splitter
-    // std::string str, char splitter
-    // std::string str, std::string splitter
+    // char *str, str_len, char *delimiter, delimiter_len
+    // char *str, str_len, char delimiter
+    // char *str, char *delimiter
+    // char *str, char delimiter
+    // std::string str, char *delimiter
+    // std::string str, char delimiter
+    // std::string str, std::string delimiter
 
     vector<shadow_string<char>> r;
 
-    // char *str, str_len, char *splitter, size_t splitter_len
+    // char *str, str_len, char *delimiter, size_t delimiter_len
 
     r = str_split("a|b", 0, "||", 0);
     XL_TEST_ASSERT(r.size() == 0);
@@ -80,7 +80,7 @@ XL_NAMED_TEST_CASE(str_split)
     XL_TEST_ASSERT((string)r[0] == "a");
     XL_TEST_ASSERT((string)r[1] == "b|c");
 
-    // char *str, str_len, char splitter
+    // char *str, str_len, char delimiter
 
     r = str_split("a|b", 0, '|');
     XL_TEST_ASSERT(r.size() == 1);
@@ -104,7 +104,7 @@ XL_NAMED_TEST_CASE(str_split)
     XL_TEST_ASSERT((string)r[0] == "a");
     XL_TEST_ASSERT((string)r[1] == "b|c");
 
-    // char *str, char *splitter
+    // char *str, char *delimiter
 
     r = str_split("", "");
     XL_TEST_ASSERT(r.size() == 0);
@@ -152,7 +152,7 @@ XL_NAMED_TEST_CASE(str_split)
     XL_TEST_ASSERT((string)r[0] == "a");
     XL_TEST_ASSERT((string)r[1] == "b|c");
 
-    // char *str, char splitter
+    // char *str, char delimiter
     r = str_split("", '|');
     XL_TEST_ASSERT(r.size() == 1);
     XL_TEST_ASSERT((string)r[0] == "");
@@ -175,7 +175,7 @@ XL_NAMED_TEST_CASE(str_split)
     XL_TEST_ASSERT((string)r[0] == "a");
     XL_TEST_ASSERT((string)r[1] == "b|c");
 
-    // std::string str, char *splitter
+    // std::string str, char *delimiter
 
     std::string str;
     str = "";
@@ -230,7 +230,7 @@ XL_NAMED_TEST_CASE(str_split)
     XL_TEST_ASSERT((string)r[0] == "a");
     XL_TEST_ASSERT((string)r[1] == "b|c");
 
-    // std::string str, char splitter
+    // std::string str, char delimiter
 
     str = "";
     r = str_split(str, '|');
@@ -259,7 +259,7 @@ XL_NAMED_TEST_CASE(str_split)
     XL_TEST_ASSERT((string)r[0] == "a");
     XL_TEST_ASSERT((string)r[1] == "b|c");
 
-    // std::string str, std::string splitter
+    // std::string str, std::string delimiter
 
     str = "";
     r = str_split(str, string(""));
@@ -317,17 +317,17 @@ XL_NAMED_TEST_CASE(str_split)
 // str_split_copy
 XL_NAMED_TEST_CASE(str_split_copy)
 {
-    // char *str, str_len, char *splitter, splitter_len
-    // char *str, str_len, char splitter
-    // char *str, char *splitter
-    // char *str, char splitter
-    // std::string str, char *splitter
-    // std::string str, char splitter
-    // std::string str, std::string splitter
+    // char *str, str_len, char *delimiter, delimiter_len
+    // char *str, str_len, char delimiter
+    // char *str, char *delimiter
+    // char *str, char delimiter
+    // std::string str, char *delimiter
+    // std::string str, char delimiter
+    // std::string str, std::string delimiter
 
     vector<string> r;
 
-    // char *str, str_len, char *splitter, size_t splitter_len
+    // char *str, str_len, char *delimiter, size_t delimiter_len
 
     r = str_split_copy("a|b", 0, "||", 0);
     XL_TEST_ASSERT(r.size() == 0);
@@ -375,7 +375,7 @@ XL_NAMED_TEST_CASE(str_split_copy)
     XL_TEST_ASSERT(r[0] == "a");
     XL_TEST_ASSERT(r[1] == "b|c");
 
-    // char *str, str_len, char splitter
+    // char *str, str_len, char delimiter
 
     r = str_split_copy("a|b", 0, '|');
     XL_TEST_ASSERT(r.size() == 1);
@@ -399,7 +399,7 @@ XL_NAMED_TEST_CASE(str_split_copy)
     XL_TEST_ASSERT(r[0] == "a");
     XL_TEST_ASSERT(r[1] == "b|c");
 
-    // char *str, char *splitter
+    // char *str, char *delimiter
 
     r = str_split_copy("", "");
     XL_TEST_ASSERT(r.size() == 0);
@@ -447,7 +447,7 @@ XL_NAMED_TEST_CASE(str_split_copy)
     XL_TEST_ASSERT(r[0] == "a");
     XL_TEST_ASSERT(r[1] == "b|c");
 
-    // char *str, char splitter
+    // char *str, char delimiter
     r = str_split_copy("", '|');
     XL_TEST_ASSERT(r.size() == 1);
     XL_TEST_ASSERT(r[0] == "");
@@ -470,7 +470,7 @@ XL_NAMED_TEST_CASE(str_split_copy)
     XL_TEST_ASSERT(r[0] == "a");
     XL_TEST_ASSERT(r[1] == "b|c");
 
-    // std::string str, char *splitter
+    // std::string str, char *delimiter
 
     r = str_split_copy(string(""), "");
     XL_TEST_ASSERT(r.size() == 0);
@@ -518,7 +518,7 @@ XL_NAMED_TEST_CASE(str_split_copy)
     XL_TEST_ASSERT(r[0] == "a");
     XL_TEST_ASSERT(r[1] == "b|c");
 
-    // std::string str, char splitter
+    // std::string str, char delimiter
 
     r = str_split_copy(string(""), '|');
     XL_TEST_ASSERT(r.size() == 1);
@@ -542,7 +542,7 @@ XL_NAMED_TEST_CASE(str_split_copy)
     XL_TEST_ASSERT(r[0] == "a");
     XL_TEST_ASSERT(r[1] == "b|c");
 
-    // std::string str, std::string splitter
+    // std::string str, std::string delimiter
 
     r = str_split_copy(string(""), string(""));
     XL_TEST_ASSERT(r.size() == 0);
@@ -594,14 +594,14 @@ XL_NAMED_TEST_CASE(str_split_copy)
 // str_combine
 XL_NAMED_TEST_CASE(str_combine)
 {
-    // shadow_string list, char *splitter, splitter_len
-    // shadow_string list, char *splitter
-    // shadow_string list, char splitter
-    // shadow_string list, std::string splitter
-    // std::string list, char *splitter, splitter_len
-    // std::string list, char *splitter
-    // std::string list, char splitter
-    // std::string list, std::string splitter
+    // shadow_string list, char *delimiter, delimiter_len
+    // shadow_string list, char *delimiter
+    // shadow_string list, char delimiter
+    // shadow_string list, std::string delimiter
+    // std::string list, char *delimiter, delimiter_len
+    // std::string list, char *delimiter
+    // std::string list, char delimiter
+    // std::string list, std::string delimiter
 
     const char *p = "ab";
     vector<shadow_string<char>> l0;
@@ -611,7 +611,7 @@ XL_NAMED_TEST_CASE(str_combine)
     l2.push_back(shadow_string<char>(p++, 1));
     l2.push_back(shadow_string<char>(p++, 1));
 
-    // shadow_string list, char *splitter, splitter_len
+    // shadow_string list, char *delimiter, delimiter_len
     XL_TEST_ASSERT(str_combine(l0, "|||", 1) == "");
     XL_TEST_ASSERT(str_combine(l0, "|||", 2) == "");
     XL_TEST_ASSERT(str_combine(l0, "|||", 3) == "");
@@ -621,15 +621,15 @@ XL_NAMED_TEST_CASE(str_combine)
     XL_TEST_ASSERT(str_combine(l2, "|||", 1) == "a|b");
     XL_TEST_ASSERT(str_combine(l2, "|||", 2) == "a||b");
     XL_TEST_ASSERT(str_combine(l2, "|||", 3) == "a|||b");
-    // shadow_string list, char *splitter
+    // shadow_string list, char *delimiter
     XL_TEST_ASSERT(str_combine(l0, "|") == "");
     XL_TEST_ASSERT(str_combine(l1, "|") == "a");
     XL_TEST_ASSERT(str_combine(l2, "|") == "a|b");
-    // shadow_string list, char splitter
+    // shadow_string list, char delimiter
     XL_TEST_ASSERT(str_combine(l0, '|') == "");
     XL_TEST_ASSERT(str_combine(l1, '|') == "a");
     XL_TEST_ASSERT(str_combine(l2, '|') == "a|b");
-    // shadow_string list, std::string splitter
+    // shadow_string list, std::string delimiter
     XL_TEST_ASSERT(str_combine(l0, string("|")) == "");
     XL_TEST_ASSERT(str_combine(l1, string("|")) == "a");
     XL_TEST_ASSERT(str_combine(l2, string("|")) == "a|b");
@@ -641,7 +641,7 @@ XL_NAMED_TEST_CASE(str_combine)
     m2.push_back("a");
     m2.push_back("b");
 
-    // std::string list, char *splitter, splitter_len
+    // std::string list, char *delimiter, delimiter_len
     XL_TEST_ASSERT(str_combine(m0, "|||", 1) == "");
     XL_TEST_ASSERT(str_combine(m0, "|||", 2) == "");
     XL_TEST_ASSERT(str_combine(m0, "|||", 3) == "");
@@ -651,15 +651,15 @@ XL_NAMED_TEST_CASE(str_combine)
     XL_TEST_ASSERT(str_combine(m2, "|||", 1) == "a|b");
     XL_TEST_ASSERT(str_combine(m2, "|||", 2) == "a||b");
     XL_TEST_ASSERT(str_combine(m2, "|||", 3) == "a|||b");
-    // std::string list, char *splitter
+    // std::string list, char *delimiter
     XL_TEST_ASSERT(str_combine(m0, "|") == "");
     XL_TEST_ASSERT(str_combine(m1, "|") == "a");
     XL_TEST_ASSERT(str_combine(m2, "|") == "a|b");
-    // std::string list, char splitter
+    // std::string list, char delimiter
     XL_TEST_ASSERT(str_combine(m0, '|') == "");
     XL_TEST_ASSERT(str_combine(m1, '|') == "a");
     XL_TEST_ASSERT(str_combine(m2, '|') == "a|b");
-    // std::string list, std::string splitter
+    // std::string list, std::string delimiter
     XL_TEST_ASSERT(str_combine(m0, string("|")) == "");
     XL_TEST_ASSERT(str_combine(m1, string("|")) == "a");
     XL_TEST_ASSERT(str_combine(m2, string("|")) == "a|b");
