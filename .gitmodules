@@ -1,6 +1,3 @@
-[submodule "external/VSProps"]
-	path = external/VSProps
-	url = https://github.com/Streamlet/VSProps.git
 [submodule "external/xlUnitTest"]
 	path = external/xlUnitTest
 	url = https://github.com/Streamlet/xlUnitTest.git
