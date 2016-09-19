@@ -7,6 +7,6 @@ endif()
 file(GLOB SRC_LIST *.h)
 add_custom_target(stdex SOURCES ${SRC_LIST})
 
-file(GLOB SRC_LIST "unittest/*cpp")
+file(GLOB SRC_LIST "unittest/*.cpp")
 add_executable(unittest ${SRC_LIST})
 add_dependencies(unittest stdex)
