@@ -30,7 +30,7 @@ XL_NAMED_TEST_CASE(str_split)
     // std::string str, char delimiter
     // std::string str, std::string delimiter
 
-    vector<shadow_string<char>> r;
+    vector<shadow_string> r;
 
     // char *str, str_len, char *delimiter, size_t delimiter_len
 
@@ -604,12 +604,12 @@ XL_NAMED_TEST_CASE(str_combine)
     // std::string list, std::string delimiter
 
     const char *p = "ab";
-    vector<shadow_string<char>> l0;
-    vector<shadow_string<char>> l1;
-    l1.push_back(shadow_string<char>(p, 1));
-    vector<shadow_string<char>> l2;
-    l2.push_back(shadow_string<char>(p++, 1));
-    l2.push_back(shadow_string<char>(p++, 1));
+    vector<shadow_string> l0;
+    vector<shadow_string> l1;
+    l1.push_back(shadow_string(p, 1));
+    vector<shadow_string> l2;
+    l2.push_back(shadow_string(p++, 1));
+    l2.push_back(shadow_string(p++, 1));
 
     // shadow_string list, char *delimiter, delimiter_len
     XL_TEST_ASSERT(str_combine(l0, "|||", 1) == "");

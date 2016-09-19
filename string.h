@@ -34,21 +34,21 @@ namespace stdex
 
 
     //
-    // shadow_string
+    // basic_shadow_string
     //
 
     struct Null;
     template<class _Elem, class _SSTraits = Null, class _SSAlloc = Null>
-    class shadow_string
+    class basic_shadow_string
     {
     public:
-        shadow_string() : data(0), len(0) { }
-        shadow_string(const _Elem *s) : data(s), len(str_length(s)) { }
-        shadow_string(const _Elem *begin, const _Elem *end) : data(begin), len(end - begin) { }
-        shadow_string(const _Elem *data, size_t len) : data(data), len(len) { }
+        basic_shadow_string() : data(0), len(0) { }
+        basic_shadow_string(const _Elem *s) : data(s), len(str_length(s)) { }
+        basic_shadow_string(const _Elem *begin, const _Elem *end) : data(begin), len(end - begin) { }
+        basic_shadow_string(const _Elem *data, size_t len) : data(data), len(len) { }
 
         template <class _Traits, class _Alloc>
-        shadow_string(const std::basic_string<_Elem, _Traits, _Alloc> &s) : data(s.c_str()), len(s.length()) { }
+        basic_shadow_string(const std::basic_string<_Elem, _Traits, _Alloc> &s) : data(s.c_str()), len(s.length()) { }
 
         const _Elem *c_str() const { return data; }
         size_t length() const { return len; }
@@ -63,13 +63,16 @@ namespace stdex
         size_t len;
     };
 
+    typedef basic_shadow_string<char> shadow_string;
+    typedef basic_shadow_string<wchar_t> shadow_wstring;
+
 
     //
     // str_split
     //
 
     template<class _Elem, class _Traits = Null, class _Alloc = Null,
-        template <class _Elem, class _Traits, class _Alloc> class _StrType = shadow_string>
+        template <class _Elem, class _Traits, class _Alloc> class _StrType = basic_shadow_string>
     inline std::vector<_StrType<_Elem, _Traits, _Alloc>> str_split(
         const _Elem *str, size_t str_len,
         const _Elem *delimiter, size_t delimiter_len,
@@ -88,7 +91,7 @@ namespace stdex
     }
 
     template<class _Elem, class _Traits = Null, class _Alloc = Null,
-        template <class _Elem, class _Traits, class _Alloc> class _StrType = shadow_string>
+        template <class _Elem, class _Traits, class _Alloc> class _StrType = basic_shadow_string>
     inline std::vector<_StrType<_Elem, _Traits, _Alloc>> str_split(
         const _Elem *str, size_t str_len, const _Elem delimiter, size_t max = 0
     ) {
@@ -96,7 +99,7 @@ namespace stdex
     }
 
     template<class _Elem, class _Traits = Null, class _Alloc = Null,
-        template <class _Elem, class _Traits, class _Alloc> class _StrType = shadow_string>
+        template <class _Elem, class _Traits, class _Alloc> class _StrType = basic_shadow_string>
     inline std::vector<_StrType<_Elem, _Traits, _Alloc>> str_split(
         const _Elem *str, const _Elem *delimiter, size_t max = 0
     ) {
@@ -104,7 +107,7 @@ namespace stdex
     }
 
     template<class _Elem, class _Traits = Null, class _Alloc = Null,
-        template <class _Elem, class _Traits, class _Alloc> class _StrType = shadow_string>
+        template <class _Elem, class _Traits, class _Alloc> class _StrType = basic_shadow_string>
     inline std::vector<_StrType<_Elem, _Traits, _Alloc>> str_split(
         const _Elem *str, const _Elem delimiter, size_t max = 0
     ) {
@@ -112,7 +115,7 @@ namespace stdex
     }
 
     template<class _Elem, class _Traits, class _Alloc, class _SSTraits = Null, class _SSAlloc = Null,
-        template <class _Elem, class _Traits, class _Alloc> class _StrType = shadow_string>
+        template <class _Elem, class _Traits, class _Alloc> class _StrType = basic_shadow_string>
     inline std::vector<_StrType<_Elem, _SSTraits, _SSAlloc>> str_split(
         const std::basic_string<_Elem, _Traits, _Alloc> &str,
         const _Elem *delimiter,
@@ -122,7 +125,7 @@ namespace stdex
     }
 
     template<class _Elem, class _Traits, class _Alloc, class _SSTraits = Null, class _SSAlloc = Null,
-        template <class _Elem, class _Traits, class _Alloc> class _StrType = shadow_string>
+        template <class _Elem, class _Traits, class _Alloc> class _StrType = basic_shadow_string>
     inline std::vector<_StrType<_Elem, _SSTraits, _SSAlloc>> str_split(
         const std::basic_string<_Elem, _Traits, _Alloc> &str,
         const _Elem delimiter,
@@ -132,7 +135,7 @@ namespace stdex
     }
 
     template<class _Elem, class _Traits, class _Alloc, class _SSTraits = Null, class _SSAlloc = Null,
-        template <class _Elem, class _Traits, class _Alloc> class _StrType = shadow_string>
+        template <class _Elem, class _Traits, class _Alloc> class _StrType = basic_shadow_string>
     inline std::vector<_StrType<_Elem, _SSTraits, _SSAlloc>> str_split(
         const std::basic_string<_Elem, _Traits, _Alloc> &str,
         const std::basic_string<_Elem, _Traits, _Alloc> &delimiter,
@@ -208,7 +211,7 @@ namespace stdex
 
     template<class _Elem, class _Traits = std::char_traits<_Elem>, class _Alloc = std::allocator<_Elem>,
         class _SSTraits = Null, class _SSAlloc = Null,
-        template <class _Elem, class _Traits, class _Alloc> class _StrType = shadow_string>
+        template <class _Elem, class _Traits, class _Alloc> class _StrType = basic_shadow_string>
     inline std::basic_string<_Elem, _Traits, _Alloc> str_combine(
         const std::vector<_StrType<_Elem, _SSTraits, _SSAlloc>> &str_list,
         const _Elem *delimiter, size_t delimiter_len
@@ -231,7 +234,7 @@ namespace stdex
 
     template<class _Elem, class _Traits = std::char_traits<_Elem>, class _Alloc = std::allocator<_Elem>,
         class _SSTraits = Null, class _SSAlloc = Null,
-        template <class _Elem, class _Traits, class _Alloc> class _StrType = shadow_string>
+        template <class _Elem, class _Traits, class _Alloc> class _StrType = basic_shadow_string>
     inline std::basic_string<_Elem, _Traits, _Alloc> str_combine(
         const std::vector<_StrType<_Elem, _SSTraits, _SSAlloc>> &str_list,
         const _Elem *delimiter
@@ -241,7 +244,7 @@ namespace stdex
 
     template<class _Elem, class _Traits = std::char_traits<_Elem>, class _Alloc = std::allocator<_Elem>,
         class _SSTraits = Null, class _SSAlloc = Null,
-        template <class _Elem, class _Traits, class _Alloc> class _StrType = shadow_string>
+        template <class _Elem, class _Traits, class _Alloc> class _StrType = basic_shadow_string>
     inline std::basic_string<_Elem, _Traits, _Alloc> str_combine(
         const std::vector<_StrType<_Elem, _SSTraits, _SSAlloc>> &str_list,
         const _Elem delimiter
@@ -251,7 +254,7 @@ namespace stdex
 
     template<class _Elem, class _Traits, class _Alloc,
         class _SSTraits = Null, class _SSAlloc = Null,
-        template <class _Elem, class _Traits, class _Alloc> class _StrType = shadow_string>
+        template <class _Elem, class _Traits, class _Alloc> class _StrType = basic_shadow_string>
     inline std::basic_string<_Elem, _Traits, _Alloc> str_combine(
         const std::vector<_StrType<_Elem, _SSTraits, _SSAlloc>> &str_list,
         const std::basic_string<_Elem, _Traits, _Alloc> &delimiter
