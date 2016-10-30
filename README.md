@@ -21,7 +21,7 @@ CRT and STL does not provide any functions or classes for string splitting and r
 
 *   str_replace_inplace
 
-    replace string inplace, that means it will modify the given string.
+    replace string inplace, the given string will be modifed.
 
 *   str_replace
 
@@ -60,9 +60,9 @@ It is something like Loki::ScopeGuard.
         fwrite(p, ...);
 
         if (...) {
-        	return;	// return if error occurs, and scope_guard will call remove("foo.bar") automatically
+        	return;	// return if error occurs, remove("foo.bar") will be called automatically by scope_guard.
         }
 
-        sg.dismiss(); // scoped_guard is dismissed, that mean it will do nothing
+        sg.dismiss(); // scoped_guard is dismissed and will do nothing.
     }
     ```
