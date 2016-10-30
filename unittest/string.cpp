@@ -2,8 +2,8 @@
 #include <string.h>
 #include <memory.h>
 
-#include "../external/xlUnitTest/UnitTest.h"
-#include "../string.h"
+#include "../external/xlUnitTest/include/unittest.h"
+#include "../include/string.h"
 
 using namespace std;
 using namespace stdex;

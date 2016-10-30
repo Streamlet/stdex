@@ -2,8 +2,8 @@
 #include <string.h>
 #include <memory.h>
 
-#include "../external/xlUnitTest/UnitTest.h"
-#include "../scope_exit.h"
+#include "../external/xlUnitTest/include/unittest.h"
+#include "../include/scope_exit.h"
 
 using namespace std;
 using namespace stdex;
