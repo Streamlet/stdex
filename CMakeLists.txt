@@ -4,7 +4,7 @@ if(${CMAKE_COMPILER_IS_GNUCXX})
   set(CMAKE_CXX_FLAGS "-std=c++11 -Wall -Werror -Wfatal-errors")
 endif()
 
-file(GLOB SRC_LIST *.h)
+file(GLOB SRC_LIST "include/*.h")
 add_custom_target(stdex SOURCES ${SRC_LIST})
 
 file(GLOB SRC_LIST "unittest/*.cpp")
